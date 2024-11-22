@@ -1,0 +1,84 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  /* Existing styles ... */
+
+/* For screens smaller than 600px */
+@media (max-width: 600px) {
+    .container {
+      width: 90%; /* Make the container take up 90% of the screen width */
+      margin: 20px auto; /* Adjust margins for better centering */
+    }
+  
+    input,
+    textarea {
+      font-size: 14px; /* Slightly smaller font size for readability */
+    }
+  
+    button {
+      font-size: 14px;
+      padding: 8px 16px; /* Adjust padding for better button size */
+    }
+  }
+  
+  /* For screens smaller than 400px */
+  @media (max-width: 400px) {
+    .form-group {
+      margin-bottom: 10px; /* Reduce spacing between form elements */
+    }
+  }
+
+  .my-element {
+    width: 300px; /* Default width */
+  }
+  
+  @media (max-width: 600px) {
+    .my-element {
+      width: 100%; /* Make the element full width on screens smaller than 600px */
+    }
+  }

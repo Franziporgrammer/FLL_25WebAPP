@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Photo Submission App</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Photo Submission</h1>
+    <form id="submissionForm">
+      <div class="form-group">
+        <label for="photoUpload">Upload Photo:</label>
+        <input type="file" id="photoUpload" accept="image/*">
+      </div>
+      <div class="form-group">
+        <label for="position">Position:</label>
+        <input type="text" id="position" placeholder="Enter position" readonly> 
+      </div>
+      <div class="form-group">
+        <label for="textEntry">Text:</label>
+        <textarea id="textEntry" placeholder="Enter your text"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="time">Time:</label>
+        <input type="text" id="time" readonly>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

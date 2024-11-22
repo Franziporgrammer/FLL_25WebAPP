@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+   integrity="sha256-WBkoXOwT+KclXoTsegq-Rp8+gS0VLSnfaGtodiGk04="
+   crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+   integrity="sha256-kLaT2wvNj4Q+uM+oA5q19o7R49L+K9PWpfVkXn/v8w="
+   crossorigin=""/>
+  <style>
+    #map {
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+    <div id="map"></div>
+  </div>
+
+  <script>
+    // Initialize the map
+    const map = L.map('map').setView([51.505, -0.09], 13); // Default view
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Fetch data from your backend API to get location coordinates
+    fetch('/get-locations') // Replace '/get-locations' with your actual endpoint
+      .then(response => response.json())
+      .then(locations => {
+        locations.forEach(location => {
+          // Create a marker for each location
+          L.marker([location.latitude, location.longitude]).addTo(map)
+            .bindPopup(`
+              <b>Position:</b> ${location.position}<br>
+              <b>Text:</b> ${location.text}<br>
+              <b>Time:</b> ${location.time}
+            `).openPopup();
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching locations:', error);
+        // Handle the error appropriately (e.g., display a message to the user)
+      });
+  </script>
+</body>
+</html>
