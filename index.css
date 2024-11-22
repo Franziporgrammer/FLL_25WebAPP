@@ -45,11 +45,9 @@ body {
     border-radius: 3px;
     cursor: pointer;
   }
-
-  /* Existing styles ... */
-
-/* For screens smaller than 600px */
-@media (max-width: 600px) {
+  
+  /* For screens smaller than 600px */
+  @media (max-width: 600px) {
     .container {
       width: 90%; /* Make the container take up 90% of the screen width */
       margin: 20px auto; /* Adjust margins for better centering */
@@ -57,12 +55,13 @@ body {
   
     input,
     textarea {
-      font-size: 14px; /* Slightly smaller font size for readability */
+      font-size: 16px; /* Slightly larger font size for readability */
+      padding: 12px; /* Increase padding for better touch targets */
     }
   
     button {
-      font-size: 14px;
-      padding: 8px 16px; /* Adjust padding for better button size */
+      font-size: 16px;
+      padding: 12px 24px; /* Adjust padding for better button size */
     }
   }
   
@@ -71,14 +70,20 @@ body {
     .form-group {
       margin-bottom: 10px; /* Reduce spacing between form elements */
     }
-  }
-
-  .my-element {
-    width: 300px; /* Default width */
-  }
   
-  @media (max-width: 600px) {
-    .my-element {
-      width: 100%; /* Make the element full width on screens smaller than 600px */
+    
+    h1 {
+      font-size: 20px; /* Larger font size for the heading */
+    }
+  
+    input,
+    textarea {
+      font-size: 18px; /* Larger font size for inputs and textarea */
+      padding: 14px; /* Increase padding for better touch targets */
+    }
+  
+    button {
+      font-size: 18px;
+      padding: 14px 28px; /* Adjust padding for larger button size */
     }
   }

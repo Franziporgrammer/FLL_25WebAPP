@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Photo Submission App</title>
+  <title>Benutzerauswahl</title>
   <link rel="stylesheet" href="index.css">
+  <script>
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const role = document.getElementById('role').value;
+      if (role === 'angler') {
+        window.location.href = 'angler.html';
+      } else if (role === 'fischer') {
+        window.location.href = 'fischer.html';
+      } else if (role === 'strandbesucher') {
+        window.location.href = 'strandbesucher.html';
+      }
+    }
+  </script>
 </head>
 <body>
   <div class="container">
-    <h1>Photo Submission</h1>
-    <form id="submissionForm">
+    <h1>Wählen Sie Ihre Rolle</h1>
+    <form id="roleSelectionForm" onsubmit="handleFormSubmit(event)">
       <div class="form-group">
-        <label for="photoUpload">Upload Photo:</label>
-        <input type="file" id="photoUpload" accept="image/*">
+        <label for="role">Ich bin ein:</label>
+        <select id="role" name="role">
+          <option value="angler">Angler</option>
+          <option value="fischer">Fischer</option>
+          <option value="strandbesucher">Strandbesucher</option>
+        </select>
       </div>
-      <div class="form-group">
-        <label for="position">Position:</label>
-        <input type="text" id="position" placeholder="Enter position" readonly> 
-      </div>
-      <div class="form-group">
-        <label for="textEntry">Text:</label>
-        <textarea id="textEntry" placeholder="Enter your text"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="time">Time:</label>
-        <input type="text" id="time" readonly>
-      </div>
-      <button type="submit">Submit</button>
+      <button type="submit">Weiter</button>
     </form>
   </div>
-
-  <script src="index.js"></script>
 </body>
 </html>
