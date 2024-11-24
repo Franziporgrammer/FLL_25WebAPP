@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Benutzerauswahl</title>
+  <link rel="stylesheet" href="index.css">
+  <script>
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const role = document.getElementById('role').value;
+      if (role === 'angler') {
+        window.location.href = 'angler.html';
+      } else if (role === 'fischer') {
+        window.location.href = 'fischer.html';
+      } else if (role === 'strandbesucher') {
+        window.location.href = 'strandbesucher.html';
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Wählen Sie Ihre Rolle</h1>
+    <form id="roleSelectionForm" onsubmit="handleFormSubmit(event)">
+      <div class="form-group">
+        <label for="role">Ich bin ein:</label>
+        <select id="role" name="role">
+          <option value="angler">Angler</option>
+          <option value="fischer">Fischer</option>
+          <option value="strandbesucher">Strandbesucher</option>
+        </select>
+      </div>
+      <button type="submit">Weiter</button>
+    </form>
+  </div>
+</body>
+</html>
