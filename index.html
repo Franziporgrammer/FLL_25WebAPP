@@ -1,49 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Benutzerauswahl</title>
-  <link rel="stylesheet" href="index.css">
-  <script>
-    function handleFormSubmit(event) {
-      event.preventDefault();
-      const role = document.getElementById('role').value;
-      const time = document.querySelector('input[name="time"]:checked').value;
-      if (role === 'angler') {
-        window.location.href = 'angler.html';
-      } else if (role === 'fischer') {
-        window.location.href = 'fischer.html';
-      } else if (role === 'strandbesucher') {
-        window.location.href = 'strandbesucher.html';
-      }
-      console.log(`Role: ${role}, Time: ${time}`);
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktivitätsauswahl</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Wählen Sie Ihre Rolle</h1>
-    <form id="roleSelectionForm" onsubmit="handleFormSubmit(event)">
-      <div class="form-group">
-        <label for="role">Ich bin ein:</label>
-        <select id="role" name="role">
-          <option value="angler">Angler</option>
-          <option value="fischer">Fischer</option>
-          <option value="strandbesucher">Strandbesucher</option>
+    <h1>Wähle deine Aktivität</h1>
+    <form id="activityForm">
+        <select id="activitySelect">
+            <option value="">Bitte wählen</option>
+            <option value="Taucher">Taucher</option>
+            <option value="Fischer">Fischer</option>
+            <option value="Strandbesucher">Strandbesucher</option>
         </select>
-      </div>
-      <div class="form-group">
-        <label>Wann haben Sie die Daten gemacht?</label>
-        <div>
-          <input type="radio" id="justNow" name="time" value="justNow" required>
-          <label for="justNow">Gerade gemacht</label>
-        </div>
-        <div>
-          <input type="radio" id="earlier" name="time" value="earlier" required>
-          <label for="earlier">Schon länger her</label>
-        </div>
-      </div>
-      <button type="submit">Absenden</button>
+        <br><br>
+        <button type="button" onclick="saveSelection()">Speichern</button>
     </form>
-  </div>
+
+    <p id="savedMessage"></p>
+
+    <script>
+        function saveSelection() {
+    const select = document.getElementById('activitySelect');
+    const selectedActivity = select.value;
+    
+    if (selectedActivity) {
+        localStorage.setItem('selectedActivity', selectedActivity);
+        document.getElementById('savedMessage').innerText = `Deine Auswahl "${selectedActivity}" wurde gespeichert.`;
+        window.location.href = 'indexVIE.html';
+      } else {
+        document.getElementById('savedMessage').innerText = 'Bitte wähle eine Aktivität aus.';
+    }
+}
+
+// Zum Laden der gespeicherten Auswahl beim Laden der Seite
+window.onload = function() {
+    const savedActivity = localStorage.getItem('selectedActivity');
+    if (savedActivity) {
+        document.getElementById('activitySelect').value = savedActivity;
+        document.getElementById('savedMessage').innerText = `Gespeicherte Auswahl: "${savedActivity}"`;
+    }
+};
+    </script>
 </body>
 </html>
