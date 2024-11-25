@@ -7,6 +7,7 @@
     function handleFormSubmit(event) {
       event.preventDefault();
       const role = document.getElementById('role').value;
+      const time = document.querySelector('input[name="time"]:checked').value;
       if (role === 'angler') {
         window.location.href = 'angler.html';
       } else if (role === 'fischer') {
@@ -14,6 +15,7 @@
       } else if (role === 'strandbesucher') {
         window.location.href = 'strandbesucher.html';
       }
+      console.log(`Role: ${role}, Time: ${time}`);
     }
   </script>
 </head>
@@ -29,7 +31,18 @@
           <option value="strandbesucher">Strandbesucher</option>
         </select>
       </div>
-      <button type="submit">Weiter</button>
+      <div class="form-group">
+        <label>Wann haben Sie die Daten gemacht?</label>
+        <div>
+          <input type="radio" id="justNow" name="time" value="justNow" required>
+          <label for="justNow">Gerade gemacht</label>
+        </div>
+        <div>
+          <input type="radio" id="earlier" name="time" value="earlier" required>
+          <label for="earlier">Schon länger her</label>
+        </div>
+      </div>
+      <button type="submit">Absenden</button>
     </form>
   </div>
 </body>
