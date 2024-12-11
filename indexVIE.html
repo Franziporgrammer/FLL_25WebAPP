@@ -16,7 +16,7 @@
         <label for="textEntry">Text:</label>
         <textarea id="textEntry" placeholder="Enter your text"></textarea>
       </div>
-      <div class="form-group"></div>
+      <div class="form-group">
         <label for="photoMetadata">Photo Metadata:</label>
         <textarea id="photoMetadata" readonly placeholder="Photo metadata will appear here"></textarea>
       </div>
@@ -24,29 +24,9 @@
     </form>
   </div>
 
-  <script src="index.js">
-    
-  document.getElementById('photoUpload').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const img = new Image();
-      img.onload = function() {
-      const metadata = `Name: ${file.name}\nSize: ${file.size} bytes\nType: ${file.type}\nDimensions: ${img.width}x${img.height}`;
-      document.getElementById('photoMetadata').value = metadata;
-
-      // Display the image
-      const imgContainer = document.createElement('div');
-      imgContainer.classList.add('img-container');
-      imgContainer.appendChild(img);
-      document.querySelector('.container').appendChild(imgContainer);
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-    }
-  });
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+  <script src="index.js"></script>
+  <script>
     document.getElementById('photoUpload').addEventListener('change', function(event) {
       const file = event.target.files[0];
       if (file) {
@@ -54,8 +34,14 @@
         reader.onload = function(e) {
           const img = new Image();
           img.onload = function() {
-            const metadata = `Name: ${file.name}\nSize: ${file.size} bytes\nType: ${file.type}\nDimensions: ${img.width}x${img.height}`;
-            document.getElementById('photoMetadata').value = metadata;
+            EXIF.getData(img, function() {
+              const allMetaData = EXIF.getAllTags(this);
+              let metadata = `Name: ${file.name}\nSize: ${file.size} bytes\nType: ${file.type}\nDimensions: ${img.width}x${img.height}\n\nEXIF Data:\n`;
+              for (let tag in allMetaData) {
+                metadata += `${tag}: ${allMetaData[tag]}\n`;
+              }
+              document.getElementById('photoMetadata').value = metadata;
+            });
           };
           img.src = e.target.result;
         };
