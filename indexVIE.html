@@ -13,21 +13,41 @@
         <input type="file" id="photoUpload" accept="image/*">
       </div>
       <div class="form-group">
-        <label for="position">Position:</label>
-        <input type="text" id="position" placeholder="Enter position" readonly> 
-      </div>
-      <div class="form-group">
         <label for="textEntry">Text:</label>
         <textarea id="textEntry" placeholder="Enter your text"></textarea>
       </div>
       <div class="form-group">
-        <label for="time">Time:</label>
-        <input type="text" id="time" readonly>
+        <label for="photoMetadata">Photo Metadata:</label>
+        <textarea id="photoMetadata" readonly placeholder="Photo metadata will appear here"></textarea>
       </div>
       <button type="submit">Submit</button>
     </form>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
   <script src="index.js"></script>
+  <script>
+    document.getElementById('photoUpload').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = new Image();
+          img.onload = function() {
+            EXIF.getData(img, function() {
+              const allMetaData = EXIF.getAllTags(this);
+              let metadata = `Name: ${file.name}\nSize: ${file.size} bytes\nType: ${file.type}\nDimensions: ${img.width}x${img.height}\n\nEXIF Data:\n`;
+              for (let tag in allMetaData) {
+                metadata += `${tag}: ${allMetaData[tag]}\n`;
+              }
+              document.getElementById('photoMetadata').value = metadata;
+            });
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
 </body>
 </html>
