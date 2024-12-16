@@ -5,9 +5,6 @@
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-
-
-  
   <div class="container">
     <h1>Photo Submission</h1>
     <form id="submissionForm">
@@ -26,7 +23,7 @@
       <button type="submit">Submit</button>
     </form>
   </div>
-
+ 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
   <script src="index.js"></script>
   <script>
@@ -37,11 +34,14 @@
         reader.onload = function(e) {
           const img = new Image();
           img.onload = function() {
+            img.exifdata = null;
             EXIF.getData(img, function() {
               const allMetaData = EXIF.getAllTags(this);
-              let metadata = `Name: ${file.name}\nSize: ${file.size} bytes\nType: ${file.type}\nDimensions: ${img.width}x${img.height}\n\nEXIF Data:\n`;
+              let metadata = `Name: ${file.name}\nSize: ${file.size} bytes\nType: ${file.type}\nDimensions: ${img.width}x${img.height}\nLocation: ${allMetaData.GPSLatitude}, ${allMetaData.GPSLongitude}\nTime: ${allMetaData.DateTimeOriginal}\n`;
               for (let tag in allMetaData) {
-                metadata += `${tag}: ${allMetaData[tag]}\n`;
+                if (tag !== 'GPSLatitude' && tag !== 'GPSLongitude' && tag !== 'DateTimeOriginal') {
+                  metadata += `${tag}: ${allMetaData[tag]}\n`;
+                }
               }
               document.getElementById('photoMetadata').value = metadata;
             });
