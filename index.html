@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aktivitätsauswahl</title>
 </head>
+
+
+
+
 <body>
     <h1>Wähle deine Aktivität</h1>
     <form id="activityForm">
@@ -13,6 +17,9 @@
             <option value="Taucher">Taucher</option>
             <option value="Fischer">Fischer</option>
             <option value="Strandbesucher">Strandbesucher</option>
+            <option value="Sonstiges">Sonstiges</option>
+            </select>
+            <span id="infoIcon" style="cursor: pointer; display: none;" onclick="showInfo()">ℹ️</span>
         </select>
         <br><br>
         <button type="button" onclick="saveSelection()">Speichern</button>
