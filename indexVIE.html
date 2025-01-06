@@ -23,7 +23,14 @@
       <button type="submit">Submit</button>
     </form>
   </div>
- 
+  <script>
+    document.getElementById('submissionForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const metadata = document.getElementById('photoMetadata').value;
+      localStorage.setItem('photoMetadata', metadata);
+      alert('Photo metadata has been saved to local storage.');
+    });
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
   <script src="index.js"></script>
   <script>
@@ -37,12 +44,8 @@
             img.exifdata = null;
             EXIF.getData(img, function() {
               const allMetaData = EXIF.getAllTags(this);
-              let metadata = `Name: ${file.name}\nSize: ${file.size} bytes\nType: ${file.type}\nDimensions: ${img.width}x${img.height}\nLocation: ${allMetaData.GPSLatitude}, ${allMetaData.GPSLongitude}\nTime: ${allMetaData.DateTimeOriginal}\n`;
-              for (let tag in allMetaData) {
-                if (tag !== 'GPSLatitude' && tag !== 'GPSLongitude' && tag !== 'DateTimeOriginal') {
-                  metadata += `${tag}: ${allMetaData[tag]}\n`;
-                }
-              }
+              let metadata = `Dimensions: ${img.width}x${img.height}\nLocation: ${allMetaData.GPSLatitude}, ${allMetaData.GPSLongitude}\nTime: ${allMetaData.DateTimeOriginal}\n`;
+             
               document.getElementById('photoMetadata').value = metadata;
             });
           };
