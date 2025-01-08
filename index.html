@@ -5,6 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aktivitätsauswahl</title>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        color: #333;
+        text-align: center;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #005f6b;
+    }
+
+    form {
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+    select {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #005f6b;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background-color: #004d56;
+    }
+
+    #savedMessage {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #005f6b;
+    }
+</style>
 <body>
     <h1>Wähle deine Aktivität</h1>
     <form id="activityForm">
@@ -36,13 +82,7 @@
 }
 
 // Zum Laden der gespeicherten Auswahl beim Laden der Seite
-window.onload = function() {
-    const savedActivity = localStorage.getItem('selectedActivity');
-    if (savedActivity) {
-        document.getElementById('activitySelect').value = savedActivity;
-        document.getElementById('savedMessage').innerText = `Gespeicherte Auswahl: "${savedActivity}"`;
-    }
-};
+
     </script>
 </body>
 </html>
