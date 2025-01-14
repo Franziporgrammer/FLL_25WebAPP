@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sending Datas</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    div {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    select, input[type="text"], button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #language-switch {
+        background-color: #28a745;
+    }
+
+    #language-switch:hover {
+        background-color: #218838;
+    }
+</style>
+<script>
+    window.onload = function() {
+        const popup = document.createElement('div');
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.backgroundColor = '#fff';
+        popup.style.padding = '20px';
+        popup.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+        popup.style.borderRadius = '8px';
+        popup.style.textAlign = 'center';
+        popup.style.zIndex = '1000';
+
+        const message = document.createElement('p');
+        message.textContent = 'Zur Information: Ihre Daten wurden erfolgreich an die Forscher gesendet. Bei ihrem Fotografierten Tier handeltet es sich um eine {animal}. Vielen Dank für ihre Unterstützung!';
+        popup.appendChild(message);
+
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'Schließen';
+        closeButton.style.marginTop = '10px';
+        closeButton.style.padding = '10px';
+        closeButton.style.backgroundColor = '#007bff';
+        closeButton.style.color = '#fff';
+        closeButton.style.border = 'none';
+        closeButton.style.borderRadius = '4px';
+        closeButton.style.cursor = 'pointer';
+        closeButton.onclick = function() {
+            document.body.removeChild(popup);
+        };
+        popup.appendChild(closeButton);
+
+        document.body.appendChild(popup);
+    };
+</script>
+<body>
+    <h1>Danke für's Teilen der Daten</h1>
+    <h1>Sie können gerne ihre E-Mail oder Telefonnumer ein Adresse angeben, damit sie die Forscher bei Rückfragen bei ihnen Melden können</h1>
+    <div>
+        <label for="contact-method">Kontaktmethode:</label>
+        <select id="contact-method" name="contact-method">
+            <option value="email">E-Mail</option>
+            <option value="phone">Telefonnummer</option>
+        </select>
+        <input type="text" id="contact-info" name="contact-info" placeholder="Ihre E-Mail oder Telefonnummer">
+        <button type="submit">Senden</button>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <label for="language-switch">Sprache:</label>
+        <button id="language-switch" onclick="switchLanguage()">Deutsch</button>
+    </div>
+
+    <script>
+        function switchLanguage() {
+            const button = document.getElementById('language-switch');
+            const germanText = {
+                title: "Danke für's Teilen der Daten",
+                instruction: "Sie können gerne ihre E-Mail oder Telefonnumer ein Adresse angeben, damit sie die Forscher bei Rückfragen bei ihnen Melden können",
+                contactMethod: "Kontaktmethode:",
+                sendButton: "Senden",
+                languageButton: "Deutsch"
+            };
+            const englishText = {
+                title: "Thank you for sharing the data",
+                instruction: "You can provide your email or phone number so that researchers can contact you if they have any questions",
+                contactMethod: "Contact Method:",
+                sendButton: "Send",
+                languageButton: "English"
+            };
+
+            const isGerman = button.textContent === "Deutsch";
+            const text = isGerman ? englishText : germanText;
+
+            document.querySelector('h1:nth-of-type(1)').textContent = text.title;
+            document.querySelector('h1:nth-of-type(2)').textContent = text.instruction;
+            document.querySelector('label[for="contact-method"]').textContent = text.contactMethod;
+            document.querySelector('button[type="submit"]').textContent = text.sendButton;
+            button.textContent = text.languageButton;
+        }
+    </script>
+</body>
+</html>
