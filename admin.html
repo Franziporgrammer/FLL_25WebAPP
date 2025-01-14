@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fish Sightings Map</title>
+    <title>Daten ansehen</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
@@ -49,16 +49,16 @@
 </head>
 <body>
     <header>
-        <h1>Fish Sightings Map</h1>
+        <h1>Daten ansehen</h1>
     </header>
     <main>
         <div id="filter-container">
-            <label for="profession-filter">Filter by Profession:</label>
+            <label for="profession-filter">Bestimmte Rolle auswählen: </label>
             <select id="profession-filter">
-                <option value="all">All</option>
-                <option value="fisher">Fisher</option>
-                <option value="beachgoer">Beachgoer</option>
-                <option value="diver">Diver</option>
+                <option value="all">Alle</option>
+                <option value="fisher">Fischer</option>
+                <option value="beachgoer">Strandbesucher</option>
+                <option value="diver">Taucher</option>
             </select>
         </div>
         <div id="map"></div>
@@ -70,21 +70,21 @@
                 "species": "Clownfish",
                 "image": "https://example.com/clownfish.jpg",
                 "location": [48.8566, 2.3522],
-                "reportedBy": "fisher",
+                "reportedBy": "fischer",
             },
             {
                 "id": 2,
                 "species": "Lionfish",
                 "image": "https://example.com/lionfish.jpg",
                 "location": [34.0522, -118.2437],
-                "reportedBy": "diver",
+                "reportedBy": "taucher",
             },
             {
                 "id": 3,
                 "species": "Salmon",
                 "image": "https://example.com/salmon.jpg",
                 "location": [60.1695, 24.9354],
-                "reportedBy": "beachgoer",
+                "reportedBy": "strandbesucher",
             }
         ];
 
@@ -99,7 +99,7 @@
         function displayMarkers(data) {
             data.forEach(entry => {
                 L.marker(entry.location).addTo(map)
-                    .bindPopup(`<strong>${entry.species}</strong><br><img src="${entry.image}" alt="${entry.species}" style="width: 100px;">`);
+                    .bindPopup(`<strong>${entry.species}</strong><br><img src="${entry.image}" alt="${entry.species}" style="width: 100px;"><br><em>Gesichtet von einem: ${entry.reportedBy}</em>`);
             });
         }
 
