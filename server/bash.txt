@@ -1,0 +1,11 @@
+/fish-sightings-map
+├── /backend
+│   ├── server.js         # Node.js Express server
+│   ├── data.json         # Sample data (initial database)
+├── /frontend
+│   ├── /src
+│   │   ├── App.js        # React App component
+│   │   ├── MapComponent.js # Leaflet map component
+│   │   ├── index.js      # React entry point
+│   │   ├── styles.css    # Styling
+├── package.json          # For managing dependencies
