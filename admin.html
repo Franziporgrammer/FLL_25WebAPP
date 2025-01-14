@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Sightings Map</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #0078A8;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #filter-container {
+            padding: 1rem;
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #map {
+            flex: 1;
+            height: 100%;
+        }
+
+        select {
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fish Sightings Map</h1>
+    </header>
+    <main>
+        <div id="filter-container">
+            <label for="profession-filter">Filter by Profession:</label>
+            <select id="profession-filter">
+                <option value="all">All</option>
+                <option value="fisher">Fisher</option>
+                <option value="beachgoer">Beachgoer</option>
+                <option value="diver">Diver</option>
+            </select>
+        </div>
+        <div id="map"></div>
+    </main>
+    <script>
+        const sampleData = [
+            {
+                "id": 1,
+                "species": "Clownfish",
+                "image": "https://example.com/clownfish.jpg",
+                "location": [48.8566, 2.3522],
+                "reportedBy": "fisher",
+            },
+            {
+                "id": 2,
+                "species": "Lionfish",
+                "image": "https://example.com/lionfish.jpg",
+                "location": [34.0522, -118.2437],
+                "reportedBy": "diver",
+            },
+            {
+                "id": 3,
+                "species": "Salmon",
+                "image": "https://example.com/salmon.jpg",
+                "location": [60.1695, 24.9354],
+                "reportedBy": "beachgoer",
+            }
+        ];
+
+        const map = L.map('map').setView([20, 0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        const professionFilter = document.getElementById('profession-filter');
+
+        function displayMarkers(data) {
+            data.forEach(entry => {
+                L.marker(entry.location).addTo(map)
+                    .bindPopup(`<strong>${entry.species}</strong><br><img src="${entry.image}" alt="${entry.species}" style="width: 100px;">`);
+            });
+        }
+
+        function filterData(profession) {
+            map.eachLayer(layer => {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+            const filteredData = profession === 'all' ? sampleData : sampleData.filter(item => item.reportedBy === profession);
+            displayMarkers(filteredData);
+        }
+
+        professionFilter.addEventListener('change', (event) => {
+            filterData(event.target.value);
+        });
+
+        displayMarkers(sampleData);
+    </script>
+</body>
+</html>
