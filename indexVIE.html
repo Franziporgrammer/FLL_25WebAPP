@@ -74,7 +74,7 @@
   }
 </style>
 <body>
-   <h1>Photo Submission</h1>
+   <h1>Foto Hochladen</h1>
   <div class="container">
    
     <form id="submissionForm">
@@ -83,22 +83,34 @@
         <input type="file" id="photoUpload" accept="image/*">
       </div>
       <div class="form-group">
-        <label for="textEntry">Text:</label>
-        <textarea id="textEntry" placeholder="Enter your text"></textarea>
+        <label for="textEntry">Beschreibung:</label>
+        <textarea id="textEntry" placeholder="Beschreibe dein Bild..."></textarea>
       </div>
       <div class="form-group">
-        <label for="photoMetadata">Photo Metadata:</label>
-        <textarea id="photoMetadata" readonly placeholder="Photo metadata will appear here"></textarea>
+        <label for="photoMetadata">Foto Metadaten:</label>
+        <textarea id="photoMetadata" readonly placeholder="Die Foto Metadaten werden hier stehen"></textarea>
       </div>
       <button type="submit">Submit</button>
     </form>
   </div>
   <script>
+    window.addEventListener('load', function() {
+      document.getElementById('submissionForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const metadata = document.getElementById('photoMetadata').value;
+        const textEntry = document.getElementById('textEntry').value;
+
+        localStorage.setItem('photoMetadata', metadata);
+        localStorage.setItem('textEntry', textEntry);
+
+        window.location.href = 'thank-you-for-sending-pic.html';
+      });
+    });
     document.getElementById('submissionForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const metadata = document.getElementById('photoMetadata').value;
       localStorage.setItem('photoMetadata', metadata);
-      alert('Photo metadata has been saved to local storage.');
+     
     });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
@@ -114,7 +126,7 @@
             img.exifdata = null;
             EXIF.getData(img, function() {
               const allMetaData = EXIF.getAllTags(this);
-              let metadata = `Location: ${allMetaData.GPSLatitude}, ${allMetaData.GPSLongitude}\nTime: ${allMetaData.DateTimeOriginal}\nArtist: ${allMetaData.Artist}\n`;
+              let metadata = `Location: ${allMetaData.GPSLatitude}, ${allMetaData.GPSLongitude}\nTime: ${allMetaData.DateTimeOriginal}\n`;
               document.getElementById('photoMetadata').value = metadata;
             });
            
@@ -128,10 +140,21 @@
       event.preventDefault();
       const metadata = document.getElementById('photoMetadata').value;
       const textEntry = document.getElementById('textEntry').value;
-      localStorage.setItem('photoMetadata', metadata);
+
+      const lines = metadata.split('\n');
+      const location = lines[0].split(': ')[1];
+      const time = lines[1].split(': ')[1];
+      const artist = lines[2].split(': ')[1];
+
+      localStorage.setItem('photoLocation', location);
+      localStorage.setItem('photoTime', time);
+      localStorage.setItem('photoArtist', artist);
       localStorage.setItem('textEntry', textEntry);
-      alert('Photo metadata and text have been saved to local storage.');
+
+      
     });
+  
+    
   </script>
 </body>
 </html>
