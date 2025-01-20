@@ -82,10 +82,11 @@
         popup.style.zIndex = '1000';
 
         const message = document.createElement('p');
-        const artist = localStorage.getItem('artist') || 'ka';
-        message.textContent = `Zur Information: Ihre Daten wurden erfolgreich an die Forscher gesendet. Bei ihrem Fotografierten Tier handeltet es sich um ein(e) ${artist}. Vielen Dank für ihre Unterstützung!`;
-        message.textContent = 'Zur Information: Ihre Daten wurden erfolgreich an die Forscher gesendet. Bei ihrem Fotografierten Tier handeltet es sich um ein(e) . Vielen Dank für ihre Unterstützung!';
+        message.textContent = 'Zur Information: Ihre Daten wurden erfolgreich an die Forscher gesendet. Bei ihrem Fotografierten Tier handeltet es sich um eine . Vielen Dank für ihre Unterstützung!';
+        const photoArtist = localStorage.getItem('photoArtist') || 'unbekanntes Tier';
+        message.textContent = `Zur Information: Ihre Daten wurden erfolgreich an die Forscher gesendet. Bei ihrem Fotografierten Tier handeltet es sich um ein(e) ${photoArtist}. Vielen Dank für ihre Unterstützung!`;
         popup.appendChild(message);
+
         const closeButton = document.createElement('button');
         closeButton.textContent = 'Schließen';
         closeButton.style.marginTop = '10px';
