@@ -114,10 +114,10 @@
             img.exifdata = null;
             EXIF.getData(img, function() {
               const allMetaData = EXIF.getAllTags(this);
-              let metadata = `Dimensions: ${img.width}x${img.height}\nLocation: ${allMetaData.GPSLatitude}, ${allMetaData.GPSLongitude}\nTime: ${allMetaData.DateTimeOriginal}\n`;
-             
+              let metadata = `Location: ${allMetaData.GPSLatitude}, ${allMetaData.GPSLongitude}\nTime: ${allMetaData.DateTimeOriginal}\nArtist: ${allMetaData.Artist}\n`;
               document.getElementById('photoMetadata').value = metadata;
             });
+           
           };
           img.src = e.target.result;
         };
