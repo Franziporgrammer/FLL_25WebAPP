@@ -4,86 +4,196 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aktivitätsauswahl</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #005f6b;
+        }
+
+        form {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #005f6b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #004d56;
+        }
+
+        #savedMessage {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #005f6b;
+        }
+
+        #infoButton {
+            display: none;
+            margin-top: 15px;
+            background-color: #ffa500;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #infoButton:hover {
+            background-color: #e69500;
+        }
+
+        /* Pop-up styling */
+        #infoPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            background-color: #fff;
+            border: 2px solid #005f6b;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: left;
+            padding: 20px;
+        }
+
+        #infoPopup h2 {
+            margin: 0 0 10px;
+            color: #005f6b;
+        }
+
+        #infoPopup p {
+            margin: 0 0 15px;
+        }
+
+        #closePopup {
+            display: block;
+            background-color: #005f6b;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            width: 100px;
+            margin: 0 auto;
+        }
+
+        #closePopup:hover {
+            background-color: #004d56;
+        }
+
+        /* Background overlay */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f8ff;
-        color: #333;
-        text-align: center;
-        padding: 20px;
-    }
-
-    h1 {
-        color: #005f6b;
-    }
-
-    form {
-        display: inline-block;
-        margin-top: 20px;
-    }
-
-    select {
-        padding: 10px;
-        font-size: 16px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-
-    button {
-        padding: 10px 20px;
-        font-size: 16px;
-        color: #fff;
-        background-color: #005f6b;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-
-    button:hover {
-        background-color: #004d56;
-    }
-
-    #savedMessage {
-        margin-top: 20px;
-        font-size: 18px;
-        color: #005f6b;
-    }
-</style>
 <body>
     <h1>Wähle deine Aktivität</h1>
     <form id="activityForm">
-        <select id="activitySelect">
+        <select id="activitySelect" onchange="handleSelectionChange()">
             <option value="">Bitte wählen</option>
             <option value="Taucher">Taucher</option>
             <option value="Fischer">Fischer</option>
             <option value="Strandbesucher">Strandbesucher</option>
-            <option value="sonstige">Sonstige</option> //hier könnten sonstige sachen angegeben werden müsste nur noch eine Info angezeigt werden 
+            <option value="Sonstige">Sonstige</option>
         </select>
         <br><br>
         <button type="button" onclick="saveSelection()">Speichern</button>
+        <button id="infoButton" type="button" onclick="showInfo()">Info</button>
     </form>
 
     <p id="savedMessage"></p>
 
+    <!-- Pop-up -->
+    <div id="overlay"></div>
+    <div id="infoPopup">
+        <h2>Weitere Informationen</h2>
+        <p>Unter "Sonstige" kannst du eine Aktivität auswählen, die nicht in die anderen Kategorien passt. Hier musst du nur kein Bild hinterlegen, hier kannst du einfach sonstige Daten angeben. Eine angabe des Ungefähren Ortes wäre Trotzdem gut. Zum Beispiel:</p>
+        
+        <ul>
+            <li>Krabbenfischer</li>
+            <li>Umweltschützer</li>
+            <li>Andere individuelle Berufe/Strandbesucher</li>
+        </ul>
+        <p>Mögliche Daten sind zum Beispiel:</p>
+        <ul>
+            <li>Fischreicher Ort</li>
+            <li>Umweltverschmutzung</li>
+            <li>Fischarmer Bereich</li>
+        </ul>
+        <button id="closePopup" onclick="closeInfo()">Schließen</button>
+    </div>
+
     <script>
- 
+        function handleSelectionChange() {
+            const select = document.getElementById('activitySelect');
+            const infoButton = document.getElementById('infoButton');
+
+            // Show or hide the Info button based on the selection
+            if (select.value === 'Sonstige') {
+                infoButton.style.display = 'inline-block';
+            } else {
+                infoButton.style.display = 'none';
+            }
+        }
+
         function saveSelection() {
-    const select = document.getElementById('activitySelect');
-    const selectedActivity = select.value;
-    
-    if (selectedActivity) {
-        localStorage.setItem('selectedActivity', selectedActivity);
-        document.getElementById('savedMessage').innerText = `Deine Auswahl "${selectedActivity}" wurde gespeichert.`;
-        window.location.href = 'indexVIE.html';
-      } else {
-        document.getElementById('savedMessage').innerText = 'Bitte wähle eine Aktivität aus.';
-    }
-}
+            const select = document.getElementById('activitySelect');
+            const selectedActivity = select.value;
 
+            if (selectedActivity) {
+                localStorage.setItem('selectedActivity', selectedActivity);
+                document.getElementById('savedMessage').innerText = `Deine Auswahl "${selectedActivity}" wurde gespeichert.`;
+                window.location.href = 'indexVIE.html';
+            } else {
+                document.getElementById('savedMessage').innerText = 'Bitte wähle eine Aktivität aus.';
+            }
+        }
 
+        function showInfo() {
+            document.getElementById('infoPopup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
 
+        function closeInfo() {
+            document.getElementById('infoPopup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
     </script>
 </body>
 </html>
