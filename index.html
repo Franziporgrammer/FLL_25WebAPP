@@ -143,19 +143,13 @@
     <div id="overlay"></div>
     <div id="infoPopup">
         <h2>Weitere Informationen</h2>
-        <p>Unter "Sonstige" kannst du eine Aktivität auswählen, die nicht in die anderen Kategorien passt. Hier musst du nur kein Bild hinterlegen, hier kannst du einfach sonstige Daten angeben. Eine angabe des Ungefähren Ortes wäre Trotzdem gut. Zum Beispiel:</p>
-        
+        <p>Unter "Sonstige" kannst du eine Aktivität auswählen, die nicht in die anderen Kategorien passt. Beispiele:</p>
         <ul>
             <li>Krabbenfischer</li>
             <li>Umweltschützer</li>
-            <li>Andere individuelle Berufe/Strandbesucher</li>
+            <li>Andere individuelle Aktivitäten</li>
         </ul>
-        <p>Mögliche Daten sind zum Beispiel:</p>
-        <ul>
-            <li>Fischreicher Ort</li>
-            <li>Umweltverschmutzung</li>
-            <li>Fischarmer Bereich</li>
-        </ul>
+        <p>Du kannst Daten zu Fischen, Umweltzustand oder anderen Beobachtungen hinzufügen.</p>
         <button id="closePopup" onclick="closeInfo()">Schließen</button>
     </div>
 
@@ -179,7 +173,12 @@
             if (selectedActivity) {
                 localStorage.setItem('selectedActivity', selectedActivity);
                 document.getElementById('savedMessage').innerText = `Deine Auswahl "${selectedActivity}" wurde gespeichert.`;
-                window.location.href = 'indexVIE.html';
+                
+                if (selectedActivity === 'Sonstige') {
+                    window.location.href = 'sonstiges.html';
+                } else {
+                    window.location.href = 'indexVIE.html';
+                }
             } else {
                 document.getElementById('savedMessage').innerText = 'Bitte wähle eine Aktivität aus.';
             }
