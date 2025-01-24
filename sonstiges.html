@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonstige Aktivität</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #005f6b;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 90%;
+            max-width: 400px;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #005f6b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #004d56;
+        }
+
+        .optional {
+            font-style: italic;
+            font-size: 14px;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            input, textarea {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Sonstige Aktivität melden</h1>
+    <form id="sonstigeForm">
+        <label for="description">Was hast du gesehen oder ist dir aufgefallen?*</label>
+        <textarea id="description" placeholder="Beschreibung eingeben..." required></textarea>
+
+        <label for="coordinates">Ortsangabe (Koordinaten)*</label>
+        <input type="text" id="coordinates" placeholder="z. B. 52.5200, 13.4050" required>
+
+        <label for="time">Sichtungsuhrzeit <span class="optional">(optional)</span></label>
+        <input type="time" id="time">
+
+        <label for="photo">Foto hochladen <span class="optional">(optional)</span></label>
+        <input type="file" id="photo" accept="image/*">
+
+        <button type="button" onclick="submitForm()">Senden</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            const description = document.getElementById('description').value;
+            const coordinates = document.getElementById('coordinates').value;
+            const time = document.getElementById('time').value;
+            const photoInput = document.getElementById('photo');
+
+            if (!description || !coordinates) {
+                alert('Bitte fülle alle Pflichtfelder aus!');
+                return;
+            }
+
+            const photo = photoInput.files[0] ? photoInput.files[0].name : null;
+
+            const entry = {
+                description,
+                coordinates,
+                time: time || null,
+                photo
+            };
+
+            localStorage.setItem('sonstigeEntry', JSON.stringify(entry));
+            alert('Deine Angaben wurden gespeichert.');
+            window.location.href = 'thank-you-for-sending-pic.html';
+        }
+    </script>
+</body>
+</html>
