@@ -1,0 +1,34 @@
+{
+    "fish_species": [
+      { "id": "4821XPT", "name": "Thunfisch" },
+      { "id": "7632QLM", "name": "Lachs" },
+      { "id": "1947ZNV", "name": "Hecht" },
+      { "id": "3058TJK", "name": "Forelle" },
+      { "id": "8273VXA", "name": "Karpfen" },
+      { "id": "6510PRC", "name": "Makrele" },
+      { "id": "4829MDW", "name": "Hering" },
+      { "id": "3751LSQ", "name": "Zander" },
+      { "id": "9182KFV", "name": "Wels" },
+      { "id": "2746WQP", "name": "Sardine" },
+      { "id": "1398LRC", "name": "Dorsch" },
+      { "id": "8610QTB", "name": "Aal" },
+      { "id": "4967XHZ", "name": "Barsch" },
+      { "id": "2073MNB", "name": "Seeteufel" },
+      { "id": "5728KJT", "name": "Rochen" },
+      { "id": "9234VQL", "name": "Scholle" },
+      { "id": "8145XJF", "name": "Kabeljau" },
+      { "id": "3719LPW", "name": "Flunder" },
+      { "id": "6492QNM", "name": "Stint" },
+      { "id": "2583ZRK", "name": "Haifisch" },
+      { "id": "7946TXQ", "name": "Seelachs" },
+      { "id": "1468PLM", "name": "Rotbarsch" },
+      { "id": "8531WCF", "name": "Butterfisch" },
+      { "id": "3147KXZ", "name": "Plattfisch" },
+      { "id": "6709VJM", "name": "Steinbutt" },
+      { "id": "2498QFS", "name": "Hornhecht" },
+      { "id": "4851MNC", "name": "Seehecht" },
+      { "id": "3927LRW", "name": "Stör" },
+      { "id": "7813KTP", "name": "Rotauge" }
+    ]
+  }
+  
