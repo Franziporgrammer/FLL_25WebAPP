@@ -84,7 +84,13 @@
         const message = document.createElement('p');
         message.textContent = 'Zur Information: Ihre Daten wurden erfolgreich an die Forscher gesendet. Bei ihrem Fotografierten Tier handeltet es sich um eine . Vielen Dank für ihre Unterstützung!';
         const photoTitle = localStorage.getItem('photoTitle') || 'unbekanntes Tier';
-        message.textContent = `Zur Information: Ihre Daten wurden erfolgreich an die Forscher gesendet. Bei ihrem Fotografierten Tier handeltet es sich um ein(e) ${photoTitle}. Vielen Dank für ihre Unterstützung!`;
+        const photoTitleElement = document.createElement('span');
+        photoTitleElement.textContent = photoTitle;
+        photoTitleElement.style.fontWeight = 'bold';
+        photoTitleElement.style.fontSize = '18px';
+        message.textContent = 'Zur Information: Ihre Daten wurden erfolgreich an die Forscher gesendet. Bei ihrem Fotografierten Tier handeltet es sich um ein(e) ';
+        message.appendChild(photoTitleElement);
+        message.appendChild(document.createTextNode('. Vielen Dank für ihre Unterstützung!'));
         popup.appendChild(message);
  
         const closeButton = document.createElement('button');
