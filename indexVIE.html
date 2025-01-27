@@ -8,8 +8,8 @@
   .container {
     max-width: 600px;
     margin: 0 auto;
-    padding:  20px 40px 20px 20px; 
-
+    padding:  20px 40px 20px 20px;
+ 
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -22,27 +22,27 @@
       text-align: center;
       padding: 20px;
   }
-
+ 
   h1 {
       color: #005f6b;
       text-align: center;
   }
-
+ 
   form {
       display: block;
       margin-top: 20px;
   }
-
+ 
   .form-group {
       margin-bottom: 15px;
   }
-
+ 
   label {
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
   }
-
+ 
   input[type="file"],
   textarea {
       width: 100%;
@@ -51,7 +51,7 @@
       border-radius: 5px;
       border: 1px solid #ccc;
   }
-
+ 
   button {
       padding: 10px 20px;
       font-size: 16px;
@@ -62,11 +62,11 @@
       cursor: pointer;
       margin-top: 10px;
   }
-
+ 
   button:hover {
       background-color: #004d56;
   }
-
+ 
   #savedMessage {
       margin-top: 20px;
       font-size: 18px;
@@ -87,8 +87,8 @@
         <textarea id="textEntry" placeholder="Beschreibe dein Bild..."></textarea>
       </div>
       <div class="form-group">
-        <label for="photoMetadata">Foto Metadaten:</label>
-        <textarea id="photoMetadata" readonly placeholder="Die Foto Metadaten werden hier stehen"></textarea>
+        <label for="photoMetadata">Ihre Daten:</label>
+        <textarea id="photoMetadata" readonly placeholder="Die Daten Ihres Fotos..."></textarea>
       </div>
       <button type="submit">Submit</button>
     </form>
@@ -99,10 +99,10 @@
         event.preventDefault();
         const metadata = document.getElementById('photoMetadata').value;
         const textEntry = document.getElementById('textEntry').value;
-
+ 
         localStorage.setItem('photoMetadata', metadata);
         localStorage.setItem('textEntry', textEntry);
-
+ 
         window.location.href = 'thank-you-for-sending-pic.html';
       });
     });
@@ -126,7 +126,7 @@
             img.exifdata = null;
             EXIF.getData(img, function() {
               const allMetaData = EXIF.getAllTags(this);
-              let metadata = `Location: ${allMetaData.GPSLatitude}, ${allMetaData.GPSLongitude}\nTime: ${allMetaData.DateTimeOriginal}\n`;
+              let metadata = `Location: ${allMetaData.GPSLatitude}, ${allMetaData.GPSLongitude}\nTime: ${allMetaData.DateTimeOriginal}\nArt: ${allMetaData.ImageDescription} `;
               document.getElementById('photoMetadata').value = metadata;
             });
            
@@ -140,21 +140,21 @@
       event.preventDefault();
       const metadata = document.getElementById('photoMetadata').value;
       const textEntry = document.getElementById('textEntry').value;
-
+ 
       const lines = metadata.split('\n');
       const location = lines[0].split(': ')[1];
       const time = lines[1].split(': ')[1];
-      const artist = lines[2].split(': ')[1];
-
+      const title = lines[2].split(': ')[1];
+ 
       localStorage.setItem('photoLocation', location);
       localStorage.setItem('photoTime', time);
-      localStorage.setItem('photoArtist', artist);
+      localStorage.setItem('photoTitle', title);
       localStorage.setItem('textEntry', textEntry);
-
-      
+ 
+     
     });
-  
-    
+ 
+   
   </script>
 </body>
 </html>
