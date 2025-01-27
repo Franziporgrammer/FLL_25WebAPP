@@ -18,13 +18,13 @@
         justify-content: center;
         height: 100vh;
     }
-
+ 
     h1 {
         font-size: 24px;
         margin-bottom: 10px;
         text-align: center;
     }
-
+ 
     div {
         background-color: #fff;
         padding: 20px;
@@ -33,13 +33,13 @@
         width: 300px;
         text-align: center;
     }
-
+ 
     label {
         display: block;
         margin-bottom: 5px;
         font-weight: bold;
     }
-
+ 
     select, input[type="text"], button {
         width: 100%;
         padding: 10px;
@@ -47,22 +47,22 @@
         border: 1px solid #ccc;
         border-radius: 4px;
     }
-
+ 
     button {
         background-color: #007bff;
         color: #fff;
         border: none;
         cursor: pointer;
     }
-
+ 
     button:hover {
         background-color: #0056b3;
     }
-
+ 
     #language-switch {
         background-color: #28a745;
     }
-
+ 
     #language-switch:hover {
         background-color: #218838;
     }
@@ -80,13 +80,13 @@
         popup.style.borderRadius = '8px';
         popup.style.textAlign = 'center';
         popup.style.zIndex = '1000';
-
+ 
         const message = document.createElement('p');
         message.textContent = 'Zur Information: Ihre Daten wurden erfolgreich an die Forscher gesendet. Bei ihrem Fotografierten Tier handeltet es sich um eine . Vielen Dank für ihre Unterstützung!';
-        const photoArtist = localStorage.getItem('photoArtist') || 'unbekanntes Tier';
-        message.textContent = `Zur Information: Ihre Daten wurden erfolgreich an die Forscher gesendet. Bei ihrem Fotografierten Tier handeltet es sich um ein(e) ${photoArtist}. Vielen Dank für ihre Unterstützung!`;
+        const photoTitle = localStorage.getItem('photoTitle') || 'unbekanntes Tier';
+        message.textContent = `Zur Information: Ihre Daten wurden erfolgreich an die Forscher gesendet. Bei ihrem Fotografierten Tier handeltet es sich um ein(e) ${photoTitle}. Vielen Dank für ihre Unterstützung!`;
         popup.appendChild(message);
-
+ 
         const closeButton = document.createElement('button');
         closeButton.textContent = 'Schließen';
         closeButton.style.marginTop = '10px';
@@ -100,7 +100,7 @@
             document.body.removeChild(popup);
         };
         popup.appendChild(closeButton);
-
+ 
         document.body.appendChild(popup);
     };
 </script>
@@ -116,12 +116,12 @@
         <input type="text" id="contact-info" name="contact-info" placeholder="Ihre E-Mail oder Telefonnummer">
         <button type="submit">Senden</button>
     </div>
-
+ 
     <div style="margin-top: 20px;">
         <label for="language-switch">Sprache:</label>
         <button id="language-switch" onclick="switchLanguage()">Deutsch</button>
     </div>
-
+ 
     <script>
         function switchLanguage() {
             const button = document.getElementById('language-switch');
@@ -139,10 +139,10 @@
                 sendButton: "Send",
                 languageButton: "English"
             };
-
+ 
             const isGerman = button.textContent === "Deutsch";
             const text = isGerman ? englishText : germanText;
-
+ 
             document.querySelector('h1:nth-of-type(1)').textContent = text.title;
             document.querySelector('h1:nth-of-type(2)').textContent = text.instruction;
             document.querySelector('label[for="contact-method"]').textContent = text.contactMethod;
