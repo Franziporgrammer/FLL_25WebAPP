@@ -76,12 +76,12 @@
                 var lat = convertCoordinates(coordinates[0])  + '.' + convertCoordinates(coordinates[1]);
                 var lng = convertCoordinates(coordinates[3])  + '.' + convertCoordinates(coordinates[4]);
  
-                alert('Latitude: ' + lat + ' Longitude: ' + lng);
+                
                 var map = L.map('map').setView([lat, lng], 13);
                 var marker = L.marker([lat, lng]).addTo(map);
-                marker.bindPopup('<b>Photo Info</b><br>Breitengrad: ' + lat + '<br>Längengrad: ' + lng + '<br> Art: ' + photoTitle + '<br> Zeit: ' + photoTime + '<br> Gruppe: ' + selectedActivity + '<br>Notiz: ' + textEntry).openPopup();
+                marker.bindPopup('<b>Photo Info</b><br> Art: ' + photoTitle + ' <br>Notiz: ' + textEntry +' <br> Gruppe: ' + selectedActivity + '   <br>Längengrad: ' + lng + '<br>Breitengrad: ' + lat + '<br> Zeit: ' + photoTime ).openPopup();
             } else {
-                alert('No photo location found in localStorage.');
+                alert('No photo location found');
                 var map = L.map('map').setView([51.505, -0.09], 13);
             }
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
