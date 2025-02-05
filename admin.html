@@ -61,63 +61,25 @@
                 <option value="taucher">Taucher</option>
             </select>
         </div>
-        <div id="map"></div>
+    <div id="map"></div>
     </main>
     <script>
-        const sampleData = [
-            {
-                "id": 1,
-                "species": "Clownfish",
-                "image": "https://example.com/clownfish.jpg",
-                "location": [48.8566, 2.3522],
-                "reportedBy": "fischer",
-            },
-            {
-                "id": 2,
-                "species": "Lionfish",
-                "image": "https://example.com/lionfish.jpg",
-                "location": [34.0522, -118.2437],
-                "reportedBy": "taucher",
-            },
-            {
-                "id": 3,
-                "species": "Salmon",
-                "image": "https://example.com/salmon.jpg",
-                "location": [60.1695, 24.9354],
-                "reportedBy": "strandbesucher",
+        document.addEventListener('DOMContentLoaded', function() {
+            var photoLocation = localStorage.getItem('photoLocation');
+            if (photoLocation) {
+                alert(photoLocation);
+            } else {
+                alert('No photo location found in localStorage.');
             }
-        ];
-
-        const map = L.map('map').setView([20, 0], 2);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-        }).addTo(map);
-
-        const professionFilter = document.getElementById('profession-filter');
-
-        function displayMarkers(data) {
-            data.forEach(entry => {
-                L.marker(entry.location).addTo(map)
-                    .bindPopup(`<strong>${entry.species}</strong><br><img src="${entry.image}" alt="${entry.species}" style="width: 100px;"><br><em>Gesichtet von einem: ${entry.reportedBy}</em>`);
-            });
-        }
-
-        function filterData(profession) {
-            map.eachLayer(layer => {
-                if (layer instanceof L.Marker) {
-                    map.removeLayer(layer);
-                }
-            });
-            const filteredData = profession === 'all' ? sampleData : sampleData.filter(item => item.reportedBy === profession);
-            displayMarkers(filteredData);
-        }
-
-        professionFilter.addEventListener('change', (event) => {
-            filterData(event.target.value);
         });
+       
+    var map = L.map('map').setView([51.505, -0.09], 13);
 
-        displayMarkers(sampleData);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
     </script>
 </body>
 </html>
+
+</script>
