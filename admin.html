@@ -68,12 +68,18 @@
             var photoLocation = localStorage.getItem('photoLocation');
             if (photoLocation) {
                 var coordinates = photoLocation.split(',');
-                var lat = convertCoordinates(coordinates[0]);
-                var lng = convertCoordinates(coordinates[1]);
+                var photoTime = localStorage.getItem('photoTime');
+                var photoTitle = localStorage.getItem('photoTitle');
+                var selectedActivity = localStorage.getItem('selectedActivity');
+                var textEntry = localStorage.getItem('textEntry');
+           
+                var lat = convertCoordinates(coordinates[0])  + '.' + convertCoordinates(coordinates[1]);
+                var lng = convertCoordinates(coordinates[3])  + '.' + convertCoordinates(coordinates[4]);
+ 
                 alert('Latitude: ' + lat + ' Longitude: ' + lng);
                 var map = L.map('map').setView([lat, lng], 13);
                 var marker = L.marker([lat, lng]).addTo(map);
-                marker.bindPopup('<b>Photo Location</b><br>Latitude: ' + lat + '<br>Longitude: ' + lng).openPopup();
+                marker.bindPopup('<b>Photo Info</b><br>Breitengrad: ' + lat + '<br>Längengrad: ' + lng + '<br> Art: ' + photoTitle + '<br> Zeit: ' + photoTime + '<br> Gruppe: ' + selectedActivity + '<br>Notiz: ' + textEntry).openPopup();
             } else {
                 alert('No photo location found in localStorage.');
                 var map = L.map('map').setView([51.505, -0.09], 13);
