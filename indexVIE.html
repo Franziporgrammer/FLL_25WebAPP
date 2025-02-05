@@ -87,8 +87,8 @@
         <textarea id="textEntry" placeholder="Beschreibe dein Bild..."></textarea>
       </div>
       <div class="form-group">
-        <label for="photoMetadata">Ihre Daten:</label>
-        <textarea id="photoMetadata" readonly placeholder="Die Daten Ihres Fotos..."></textarea>
+        <label for="photoMetadata"></label>
+        <textarea style="display: none;" id="photoMetadata" readonly placeholder="Die Daten Ihres Fotos..."></textarea>
       </div>
       <button type="submit">Submit</button>
     </form>
@@ -125,8 +125,10 @@
           img.onload = function() {
             img.exifdata = null;
             EXIF.getData(img, function() {
-              const allMetaData = EXIF.getAllTags(this);
-              let metadata = `Location: ${allMetaData.GPSLatitude}, ${allMetaData.GPSLongitude}\nTime: ${allMetaData.DateTimeOriginal}\nArt: ${allMetaData.ImageDescription} `;
+                const allMetaData = EXIF.getAllTags(this);
+                let metadata = `Location: ${allMetaData.GPSLatitude}, ${allMetaData.GPSLongitude}\nTime: ${allMetaData.DateTimeOriginal}\nArt: ${allMetaData.ImageDescription} `;
+                document.getElementById('photoMetadata').style.color = 'black';
+                document.getElementById('photoMetadata').value = metadata.replace(`Art: ${allMetaData.ImageDescription}`, `Art: ${allMetaData.ImageDescription}`).replace('Art:', 'Art:').replace(allMetaData.ImageDescription, `<span style="color: white;">${allMetaData.ImageDescription}</span>`);
               document.getElementById('photoMetadata').value = metadata;
             });
            
@@ -148,10 +150,10 @@
 const [latitude, longitude] = location.split(', ');
       localStorage.setItem('photoLatitude' , latitude);
       localStorage.setItem('photoLongitude', longitude);
-      localStorage.setItem('photoLocation' + file, location);
-      localStorage.setItem('photoTime' + file, time);
-      localStorage.setItem('photoTitle' + file, title);
-      localStorage.setItem('textEntry' + file, textEntry);
+      localStorage.setItem('photoLocation', location);
+      localStorage.setItem('photoTime', time);
+      localStorage.setItem('photoTitle', title);
+      localStorage.setItem('textEntry', textEntry);
       file ++;
  
      
