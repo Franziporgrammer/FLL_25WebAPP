@@ -146,8 +146,8 @@
       const time = lines[1].split(': ')[1];
       const title = lines[2].split(': ')[1];
 const [latitude, longitude] = location.split(', ');
-localStorage.setItem('photoLatitude', latitude);
-localStorage.setItem('photoLongitude', longitude);
+      localStorage.setItem('photoLatitude', latitude);
+      localStorage.setItem('photoLongitude', longitude);
       localStorage.setItem('photoLocation', location);
       localStorage.setItem('photoTime', time);
       localStorage.setItem('photoTitle', title);
