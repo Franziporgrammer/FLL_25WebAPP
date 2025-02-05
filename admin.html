@@ -67,6 +67,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             var photoLocation = localStorage.getItem('photoLocation');
             if (photoLocation) {
+                
+                
                 var coordinates = photoLocation.split(',');
                 var photoTime = localStorage.getItem('photoTime');
                 var photoTitle = localStorage.getItem('photoTitle');
@@ -80,6 +82,8 @@
                 var map = L.map('map').setView([lat, lng], 13);
                 var marker = L.marker([lat, lng]).addTo(map);
                 marker.bindPopup('<b>Photo Info</b><br> Art: ' + photoTitle + ' <br>Notiz: ' + textEntry +' <br> Gruppe: ' + selectedActivity + '   <br>Längengrad: ' + lng + '<br>Breitengrad: ' + lat + '<br> Zeit: ' + photoTime ).openPopup();
+            
+           
             } else {
                 alert('No photo location found');
                 var map = L.map('map').setView([51.505, -0.09], 13);

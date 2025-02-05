@@ -140,18 +140,19 @@
       event.preventDefault();
       const metadata = document.getElementById('photoMetadata').value;
       const textEntry = document.getElementById('textEntry').value;
- 
+      const file = 0;
       const lines = metadata.split('\n');
       const location = lines[0].split(': ')[1];
       const time = lines[1].split(': ')[1];
       const title = lines[2].split(': ')[1];
 const [latitude, longitude] = location.split(', ');
-      localStorage.setItem('photoLatitude', latitude);
+      localStorage.setItem('photoLatitude' , latitude);
       localStorage.setItem('photoLongitude', longitude);
-      localStorage.setItem('photoLocation', location);
-      localStorage.setItem('photoTime', time);
-      localStorage.setItem('photoTitle', title);
-      localStorage.setItem('textEntry', textEntry);
+      localStorage.setItem('photoLocation' + file, location);
+      localStorage.setItem('photoTime' + file, time);
+      localStorage.setItem('photoTitle' + file, title);
+      localStorage.setItem('textEntry' + file, textEntry);
+      file ++;
  
      
     });
