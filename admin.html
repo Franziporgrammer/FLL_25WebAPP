@@ -67,19 +67,25 @@
         document.addEventListener('DOMContentLoaded', function() {
             var photoLocation = localStorage.getItem('photoLocation');
             if (photoLocation) {
-                alert(photoLocation);
+                var coordinates = photoLocation.split(',');
+                var lat = convertCoordinates(coordinates[0]);
+                var lng = convertCoordinates(coordinates[1]);
+                alert('Latitude: ' + lat + ' Longitude: ' + lng);
+                var map = L.map('map').setView([lat, lng], 13);
+                var marker = L.marker([lat, lng]).addTo(map);
+                marker.bindPopup('<b>Photo Location</b><br>Latitude: ' + lat + '<br>Longitude: ' + lng).openPopup();
             } else {
                 alert('No photo location found in localStorage.');
+                var map = L.map('map').setView([51.505, -0.09], 13);
             }
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
         });
-       
-    var map = L.map('map').setView([51.505, -0.09], 13);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+        function convertCoordinates(coordinate) {
+            return coordinate.replace(',', '.');
+        }
     </script>
 </body>
 </html>
-
-</script>
