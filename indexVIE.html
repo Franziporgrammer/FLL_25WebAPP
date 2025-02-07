@@ -5,74 +5,85 @@
  
 </head>
 <style>
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding:  20px 40px 20px 20px;
  
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-  }
-  body {
+    body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f0f8ff;
-      color: #333;
-      text-align: center;
-      padding: 20px;
-  }
- 
-  h1 {
-      color: #005f6b;
-      text-align: center;
-  }
- 
-  form {
-      display: block;
-      margin-top: 20px;
-  }
- 
-  .form-group {
-      margin-bottom: 15px;
-  }
- 
-  label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-  }
- 
-  input[type="file"],
-  textarea {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-  }
- 
-  button {
-      padding: 10px 20px;
-      font-size: 16px;
-      color: #fff;
-      background-color: #005f6b;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-  }
- 
-  button:hover {
-      background-color: #004d56;
-  }
- 
-  #savedMessage {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #005f6b;
-  }
-</style>
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+
+label {
+    font-size: 20px;
+  
+    margin-bottom: 500px 50px 0 50px;
+}
+
+
+textarea {
+  width: 100%;
+  height: 80px;
+  border: white;
+  border-radius: 10px;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+padding: 10px;
+  color: white;
+  font-size: 18px;
+  resize: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+textarea::placeholder {
+  color: rgb(226, 226, 226);
+  font-size: 16px;
+}
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #005f6b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #004d56;
+        }
+input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: white;
+    padding: 10px;
+    
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+    .container {
+        background-color: white;
+        color: black;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        max-width: 600px;
+        margin-top: 2rem;
+    }
+
+    .container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+}
+
+    </style>
+
 <body>
    <h1>Foto Hochladen</h1>
   <div class="container">
@@ -82,8 +93,9 @@
         <label for="photoUpload">Upload Photo:</label>
         <input type="file" id="photoUpload" accept="image/*">
       </div>
+      <br><br>
       <div class="form-group">
-        <label for="textEntry">Beschreibung:</label>
+        <label for="textEntry">Beschreibung:</label><br><br>
         <textarea id="textEntry" placeholder="Beschreibe dein Bild..."></textarea>
       </div>
       <div class="form-group">

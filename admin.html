@@ -79,7 +79,7 @@
                 var lng = convertCoordinates(coordinates[3])  + '.' + convertCoordinates(coordinates[4]);
  
                 
-                var map = L.map('map').setView([lat, lng], 13);
+                var map = L.map('map').setView([lat, lng], 3);
                 var marker = L.marker([lat, lng]).addTo(map);
                 marker.bindPopup('<b>Photo Info</b><br> Art: ' + photoTitle + ' <br>Notiz: ' + textEntry +' <br> Gruppe: ' + selectedActivity + '   <br>Längengrad: ' + lng + '<br>Breitengrad: ' + lat + '<br> Zeit: ' + photoTime ).openPopup();
             

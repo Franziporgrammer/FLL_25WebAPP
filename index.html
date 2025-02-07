@@ -4,23 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aktivitätsauswahl</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            color: #333;
-            text-align: center;
-            padding: 20px;
-        }
 
-        h1 {
-            color: #005f6b;
-        }
+ <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        form {
-            display: inline-block;
-            margin-top: 20px;
-        }
+    .hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    .button {
+      background-color: white;
+      color: #007bff;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .button:hover {
+      background-color: #f0f0f0;
+    }
+
+    .facts {
+      background-color: white;
+      color: black;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      margin-top: 2rem;
+    }
+
+    .facts h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .facts ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
+    .facts ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .steps {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: black;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      margin-top: 2rem;
+    }
+
+    .steps h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .steps ol {
+      padding-left: 1.5rem;
+    }
+
+    .steps ol li {
+      margin-bottom: 0.8rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
 
         select {
             padding: 10px;
@@ -44,11 +126,6 @@
             background-color: #004d56;
         }
 
-        #savedMessage {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #005f6b;
-        }
 
         #infoButton {
             display: none;
